@@ -1,0 +1,16 @@
+#!/bin/sh
+sudo tunctl -t tap0 -g $USER
+sudo ifconfig tap0 up
+sudo brctl addif br0 tap0
+sudo ifconfig tap0 0.0.0.0 promisc up
+sudo ifconfig eth0 0.0.0.0 promisc up
+
+exit 0
+
+BR_STR="auto br0
+        iface br0 inet dhcp
+        bridge_ports eth0
+        bridge_stp off
+        bridge_maxwait 0
+        bridge_fd 0"
+echo "$BR_STR" >> /etc/network/interfaces
