@@ -1,0 +1,15 @@
+#!/bin/sh
+
+. ./export_path.sh
+
+qemu-system-i386 \
+-no-acpi \
+-fda $CE_FLOPPY \
+-hda $CE_HDD \
+-boot c \
+-m 128 \
+-serial stdio \
+-monitor telnet:127.0.0.1:1235,server,nowait \
+-usbdevice keyboard -usbdevice mouse \
+-usbdevice host:18d1:4ee2 \
+-net nic,model=ne2k_pci -net tap,ifname=tap0,script=no,downscript=no
