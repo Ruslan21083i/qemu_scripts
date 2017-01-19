@@ -1,0 +1,12 @@
+#!/bin/sh
+
+QEMU=/home/android/qemu-2.5.1/arm-softmmu/qemu-system-arm
+DISK=./2015-02-16-raspbian-wheezy.img
+KERNEL=/home/android/linux-versatile/arch/arm/boot/zImage
+KERNEL=./kernel-qemu
+
+$QEMU -M versatilepb -cpu arm1176 -m 256 \
+-hda $DISK -kernel ./kernel-qemu \
+-serial stdio \
+-append "root=/dev/sda2 rootfstype=ext4 rw console=ttyAMA0 earlyprintk=ttyAMA0" \
+-net nic -net user,hostfwd=tcp::2222-:22,hostfwd=tcp::5800-:5800,hostfwd=tcp::5900-:5900
