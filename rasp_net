@@ -1,0 +1,12 @@
+#!/bin/sh
+
+tunctl -d tap0
+tunctl -u $USER
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+echo 1 > /proc/sys/net/ipv4/conf/eth0/proxy_arp
+echo 1 > /proc/sys/net/ipv4/conf/tap0/proxy_arp
+
+ip link set tap0 up
+route add -host 10.0.2.15 dev tap0
+#<-- to be changed by you.
