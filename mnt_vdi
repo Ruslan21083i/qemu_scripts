@@ -7,6 +7,6 @@ sudo modprobe nbd max_part=16
 fi
 #rmmod nbd
 
-sudo qemu-nbd -c /dev/nbd0 $@
+sudo qemu-nbd -c /dev/nbd0 "$@"
 sleep 3
 sudo mount /dev/nbd0p1 /mnt
